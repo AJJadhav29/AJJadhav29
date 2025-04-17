@@ -4,11 +4,11 @@
 Passionate about transforming raw data into valuable insights. I bring a strong mix of programming skills, analytical thinking, and domain knowledge to build data-driven solutions that improve business performance.
 
 📧 [aakashjjadhav123@gmail.com](mailto:aakashjjadhav123@gmail.com)  
-🔗 [LinkedIn](https://www.linkedin.com/in/aakashjadhav123) | [GitHub](https://github.com/aakashjjadhav)
+🔗 [LinkedIn](https://www.linkedin.com/in/aakashjadhav123) | [GitHub](https://github.com/AJJadhav29)
 
 ---
 
-## 🧑‍💻 About Me
+##  About Me
 I’m currently pursuing a Master of Science in Information Systems (MIS) at Pace University, specializing in Data Science. With over two years of experience as a Data Analyst/Developer, I’ve built robust ETL pipelines, developed interactive dashboards in Power BI, and created predictive models using Python and machine learning algorithms.
 
 ---
