@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 API_KEY = os.getenv("GOOGLE_API_KEY")
-gen_ai.configure(api_key=GOOGLE_API_KEY)
+gen_ai.configure(api_key=API_KEY)
 model = gen_ai.GenerativeModel('models/gemini-pro')
 
 if "chat_session" not in st.session_state:
