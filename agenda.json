@@ -1,0 +1,23 @@
+[
+  {
+    "title": "Opening Keynote",
+    "speaker": "Dr. Maya Patel",
+    "time": "2025-03-08T09:00:00",
+    "location": "Main Hall",
+    "link": "https://zoom.us/keynote"
+  },
+  {
+    "title": "AI for Social Good",
+    "speaker": "Fatima El-Sayed",
+    "time": "2025-03-08T10:30:00",
+    "location": "Room A",
+    "link": "https://zoom.us/ai-social-good"
+  },
+  {
+    "title": "Panel: Women in Cloud",
+    "speaker": "Various",
+    "time": "2025-03-08T13:00:00",
+    "location": "Cloud Pavilion",
+    "link": "https://zoom.us/women-in-cloud"
+  }
+]
