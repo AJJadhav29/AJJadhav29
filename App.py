@@ -3,9 +3,7 @@ import google.generativeai as genai
 import os
 
 # Load your API key securely
-GEMINI_API_KEY = "AIzaSyBJs0nydf5_z39eou2fRm87gZjkXRBOMWs"  # For testing, or use st.secrets in deployment
-
-genai.configure(api_key=GEMINI_API_KEY)
+genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 
 # Create a Gemini model
 model = genai.GenerativeModel('gemini-pro')
