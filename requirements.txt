@@ -1,5 +1,5 @@
 streamlit 
 google-generativeai
 PyMuPDF
-docx
+python-docx
 
