@@ -2,6 +2,7 @@ import streamlit as st
 import google.generativeai as genai
 import fitz  # PyMuPDF
 import docx
+import pandas as pd
 
 # Load API key securely from Streamlit secrets
 api_key = st.secrets["GEMINI_API_KEY"]
@@ -106,18 +107,23 @@ if uploaded_file:
 # ----- 🔹 Mentor Match Suggestions (Static) -----
 st.markdown("### 🧑‍🏫 Find a Mentor")
 
-mentors = [
-    {"name": "Anita Sharma", "field": "Data Science", "email": "anita@example.com"},
-    {"name": "Fatima Khan", "field": "Cybersecurity", "email": "fatima@example.com"},
-    {"name": "Mei Lin", "field": "Product Management", "email": "mei@example.com"},
-]
+mentors_df = pd.read_csv("mentors.csv")
 
-interest = st.selectbox("Choose your tech field for mentorship:", [m["field"] for m in mentors])
+ield_choice = st.selectbox("Choose your tech field for mentorship:", mentors_df["field"].unique())
 
-matched = next((m for m in mentors if m["field"] == interest), None)
+filtered = mentors_df[mentors_df["field"] == field_choice]
 
-if matched:
-    st.markdown(f"👩 Mentor Match: **{matched['name']}**  \n📧 Contact: `{matched['email']}`")
+if not filtered.empty:
+    mentor = filtered.sample(1).iloc[0]  # Pick one at random, or use .iloc[0] for first match
+    st.markdown(f"""
+    👩 Mentor Match: **{mentor['name']}**  
+    🏷️ Field: {mentor['field']}  
+    🌍 Location: {mentor['location']}  
+    📧 Email: `{mentor['email']}`  
+    💼 Experience: {mentor['experience']} years
+    """)
+else:
+    st.warning("No mentors found for this field.")
 
 # ----- 🔹 Learning Path Suggestion -----
 st.markdown("### 📚 Personalized Learning Path")
