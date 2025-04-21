@@ -44,6 +44,16 @@ st.set_page_config(page_title="Women in Tech Career Coach", layout="centered")
 st.title("👩‍💻 Women in Tech Career Coach")
 st.markdown("Empowering women to grow in tech careers through personalized guidance.")
 
+# One-shot Gemini call for fresh prompts (without chat history)
+def ask_single_prompt(prompt_text):
+    try:
+        response = model.generate_content(prompt_text)
+        return response.text
+    except Exception as e:
+        st.error(f"❌ Error: {str(e)}")
+        return None
+
+
 # Input from user
 user_input = st.text_input("💬 Ask me anything about your tech career, resume, courses, or interviews:")
 
@@ -61,11 +71,10 @@ for msg in st.session_state["messages"]:
     who = "🧑" if msg["role"] == "user" else "🤖"
     st.markdown(f"{who}: **{msg['parts']}**")
 
-# Show latest user input separately after action buttons
+# Show latest user input again after actions
 if "last_input" in st.session_state and not user_input:
     st.markdown(f"🧑: **{st.session_state['last_input']}**")
-
-
+    
 # # Quick Action Buttons
 # st.markdown("**Need help with something specific?**")
 # col1, col2, col3 = st.columns(3)
@@ -79,14 +88,6 @@ if "last_input" in st.session_state and not user_input:
 # if col3.button("🎤 Mock Interview"):
 #     st.session_state["messages"].append({"role": "user", "parts": "Can you conduct a 3-question mock interview for a frontend developer role?"})
 
-# One-shot Gemini call for fresh prompts (without chat history)
-def ask_single_prompt(prompt_text):
-    try:
-        response = model.generate_content(prompt_text)
-        return response.text
-    except Exception as e:
-        st.error(f"❌ Error: {str(e)}")
-        return None
 
 # --- Quick Action Buttons with Direct Gemini Response ---
 st.markdown("**Need help with something specific?**")
@@ -94,21 +95,24 @@ col1, col2, col3 = st.columns(3)
 
 if col1.button("📄 Resume Review"):
     prompt = "Can you review my resume and give suggestions for improvement?"
+    st.markdown(f"🧑: **{prompt}**")
     reply = ask_single_prompt(prompt)
     if reply:
-        st.markdown(f"**🤖 Career Coach:** {reply}")
+        st.markdown(f"🤖: **{reply}**")
 
 if col2.button("📚 Suggest Courses"):
     prompt = "Can you suggest beginner-friendly courses in data science for a woman entering tech?"
+    st.markdown(f"🧑: **{prompt}**")
     reply = ask_single_prompt(prompt)
     if reply:
-        st.markdown(f"**🤖 Career Coach:** {reply}")
+        st.markdown(f"🤖: **{reply}**")
 
 if col3.button("🎤 Mock Interview"):
     prompt = "Can you conduct a 3-question mock interview for a frontend developer role?"
+    st.markdown(f"🧑: **{prompt}**")
     reply = ask_single_prompt(prompt)
     if reply:
-        st.markdown(f"**🤖 Career Coach:** {reply}")
+        st.markdown(f"🤖: **{reply}**")
 
 # if col1.button("📄 Resume Review"):
 #     prompt = "Can you review my resume and give suggestions for improvement?"
@@ -138,9 +142,6 @@ if col3.button("🎤 Mock Interview"):
 #         st.error(f"❌ Error: {str(e)}")
 
 # Resume File Upload
-
-
-
 def extract_text_from_file(uploaded_file):
     file_type = uploaded_file.name.split('.')[-1].lower()
 
@@ -162,34 +163,25 @@ def extract_text_from_file(uploaded_file):
     else:
         return "Unsupported file type."
 
-# uploaded_file = st.file_uploader("📎 Upload your resume (PDF, DOCX, or TXT)", type=["pdf", "docx", "txt"])
-
-# if uploaded_file:
-#     extracted_text = extract_text_from_file(uploaded_file)
-#     st.session_state["messages"].append({
-#         "role": "user",
-#         "parts": f"Please review my resume and provide feedback:\n{extracted_text}"
-#     })
-
-
 uploaded_file = st.file_uploader("📎 Upload your resume (PDF, DOCX, or TXT)", type=["pdf", "docx", "txt"])
 
 if uploaded_file:
     extracted_text = extract_text_from_file(uploaded_file)
     prompt = f"Please review my resume and provide feedback:\n{extracted_text}"
+    st.markdown(f"🧑: Uploaded resume for review.")
     reply = ask_single_prompt(prompt)
     if reply:
-        st.markdown(f"**🤖 Career Coach:** {reply}")
+        st.markdown(f"🤖: **{reply}**")
 
-# Multilingual Support
+# ----- Multilingual Translation -----
 language = st.selectbox("🌐 Respond in:", ["English", "Spanish", "Hindi", "French"])
+
 if language != "English" and st.session_state["messages"]:
     last_response = st.session_state["messages"][-1]["parts"]
     translation_prompt = f"Translate the following text into {language}:\n\n{last_response}"
     translated = ask_single_prompt(translation_prompt)
     if translated:
         st.markdown(f"🌐 **Translated ({language}):** {translated}")
-
 
 
 
