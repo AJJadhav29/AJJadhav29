@@ -6,7 +6,7 @@ import os
 genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 
 # Initialize model
-model = genai.GenerativeModel("gemini-pro")
+model = genai.GenerativeModel(model_name='models/gemini-pro')
 
 # Set Up Streamlit UI
 st.set_page_config(page_title="Women in Tech Career Coach", layout="centered")
