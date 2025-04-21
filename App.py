@@ -1,46 +1,29 @@
-import os
 import streamlit as st
-from dotenv import load_dotenv
-import google.generativeai as gen_ai
-from helpers import find_session_by_keyword, format_session_info
+import google.generativeai as genai
+import os
 
-load_dotenv()
+# Load your API key securely
+GEMINI_API_KEY = "AIzaSyDyYfqb5FaZDOiiKmqiLE2hyYbZdF_6cTw"  # For testing, or use st.secrets in deployment
 
-st.set_page_config(
-    page_title="WTM Companion – Event Assistant",
-    page_icon="💬",
-    layout="centered",
-)
+genai.configure(api_key=GEMINI_API_KEY)
 
-API_KEY = os.getenv("GOOGLE_API_KEY")
-gen_ai.configure(api_key=API_KEY)
-model = gen_ai.GenerativeModel('models/gemini')
+# Create a Gemini model
+model = genai.GenerativeModel('gemini-pro')
 
-if "chat_session" not in st.session_state:
-    st.session_state.chat_session = model.start_chat(history=[])
+# Set Up Streamlit UI
+st.set_page_config(page_title="Women in Tech Career Coach", layout="centered")
+st.title("👩‍💻 Women in Tech Career Coach")
+st.markdown("Empowering women to grow in tech careers through personalized guidance.")
 
-st.title("💡 WTM Companion")
-st.caption("Your AI guide to Women Techmakers IWD 2025 🎉")
+# Build the Chatbot Interface
+with st.form("chat_form"):
+    user_input = st.text_area("💬 Ask me anything about your tech career, resume, courses, or interviews:")
+    submit = st.form_submit_button("Send")
 
-# Show history
-for message in st.session_state.chat_session.history:
-    with st.chat_message("assistant" if message.role == "model" else "user"):
-        st.markdown(message.parts[0].text)
+if submit and user_input:
+    with st.spinner("Thinking..."):
+        response = model.generate_content(user_input)
+        st.markdown(f"**Career Coach:** {response.text}")
 
-user_input = st.chat_input("Ask me about sessions, speakers, or locations...")
-if user_input:
-    st.chat_message("user").markdown(user_input)
-    gemini_reply = st.session_state.chat_session.send_message(user_input)
-    user_question = gemini_reply.text
 
-    # Try to extract session info using Gemini’s understanding
-    keyword_guess = gemini_reply.text.strip().split("\n")[0].replace("**", "")
-    session = find_session_by_keyword(keyword_guess)
-    response = format_session_info(session)
 
-    with st.chat_message("assistant"):
-        st.markdown(response)
-
-    # Optional: show map on venue-related queries
-    if "where" in user_input.lower() or "location" in user_input.lower():
-        st.image("static/venue_map.png", caption="📍 Event Venue Map")
