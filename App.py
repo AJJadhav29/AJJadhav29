@@ -2,11 +2,11 @@ import streamlit as st
 import google.generativeai as genai
 import os
 
-# Load your API key securely
+# Load Gemini API Key from Streamlit secrets
 genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 
-# Create a Gemini model
-model = genai.GenerativeModel('gemini-pro')
+# Initialize model
+model = genai.GenerativeModel("gemini-pro")
 
 # Set Up Streamlit UI
 st.set_page_config(page_title="Women in Tech Career Coach", layout="centered")
