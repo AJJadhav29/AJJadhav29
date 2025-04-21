@@ -54,17 +54,17 @@ def ask_single_prompt(prompt_text):
         return None
 
 
-# # Input from user
-# user_input = st.text_input("💬 Ask me anything about your tech career, resume, courses, or interviews:")
+# Input from user
+user_input = st.text_input("💬 Ask me anything about your tech career, resume, courses, or interviews:")
 
-# if user_input:
-#     st.session_state["last_input"] = user_input
-#     st.session_state["messages"].append({"role": "user", "parts": user_input})
-#     try:
-#         response = model.generate_content(st.session_state["messages"])
-#         st.session_state["messages"].append({"role": "model", "parts": response.text})
-#     except Exception as e:
-#         st.error(f"❌ Error: {str(e)}")
+if user_input:
+    st.session_state["last_input"] = user_input
+    st.session_state["messages"].append({"role": "user", "parts": user_input})
+    try:
+        response = model.generate_content(st.session_state["messages"])
+        st.session_state["messages"].append({"role": "model", "parts": response.text})
+    except Exception as e:
+        st.error(f"❌ Error: {str(e)}")
 
 # Display chat history
 for msg in st.session_state["messages"]:
@@ -183,19 +183,6 @@ if language != "English" and st.session_state["messages"]:
     if translated:
         st.markdown(f"🌐 **Translated ({language}):** {translated}")
 
-st.markdown("---")
-st.subheader("💬 Ask a career-related question")
-
-user_input = st.text_input("Type your question:")
-
-if user_input:
-    st.session_state["last_input"] = user_input
-    st.session_state["messages"].append({"role": "user", "parts": user_input})
-    try:
-        response = model.generate_content(st.session_state["messages"])
-        st.session_state["messages"].append({"role": "model", "parts": response.text})
-    except Exception as e:
-        st.error(f"❌ Error: {str(e)}")
 
 
 
