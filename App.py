@@ -48,6 +48,7 @@ st.markdown("Empowering women to grow in tech careers through personalized guida
 user_input = st.text_input("💬 Ask me anything about your tech career, resume, courses, or interviews:")
 
 if user_input:
+    st.session_state["last_input"] = user_input
     st.session_state["messages"].append({"role": "user", "parts": user_input})
     try:
         response = model.generate_content(st.session_state["messages"])
@@ -59,6 +60,11 @@ if user_input:
 for msg in st.session_state["messages"]:
     who = "🧑" if msg["role"] == "user" else "🤖"
     st.markdown(f"{who}: **{msg['parts']}**")
+
+# Show latest user input separately after action buttons
+if "last_input" in st.session_state and not user_input:
+    st.markdown(f"🧑: **{st.session_state['last_input']}**")
+
 
 # # Quick Action Buttons
 # st.markdown("**Need help with something specific?**")
@@ -171,20 +177,19 @@ uploaded_file = st.file_uploader("📎 Upload your resume (PDF, DOCX, or TXT)", 
 if uploaded_file:
     extracted_text = extract_text_from_file(uploaded_file)
     prompt = f"Please review my resume and provide feedback:\n{extracted_text}"
-    st.session_state["messages"].append({"role": "user", "parts": prompt})
-    try:
-        response = model.generate_content(st.session_state["messages"])
-        st.session_state["messages"].append({"role": "model", "parts": response.text})
-    except Exception as e:
-        st.error(f"❌ Error: {str(e)}")
+    reply = ask_single_prompt(prompt)
+    if reply:
+        st.markdown(f"**🤖 Career Coach:** {reply}")
 
 # Multilingual Support
 language = st.selectbox("🌐 Respond in:", ["English", "Spanish", "Hindi", "French"])
-if language != "English":
-    st.session_state["messages"].append({
-        "role": "user",
-        "parts": f"Translate the next answer into {language}."
-    })
+if language != "English" and st.session_state["messages"]:
+    last_response = st.session_state["messages"][-1]["parts"]
+    translation_prompt = f"Translate the following text into {language}:\n\n{last_response}"
+    translated = ask_single_prompt(translation_prompt)
+    if translated:
+        st.markdown(f"🌐 **Translated ({language}):** {translated}")
+
 
 
 
