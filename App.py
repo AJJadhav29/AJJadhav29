@@ -60,18 +60,50 @@ for msg in st.session_state["messages"]:
     who = "🧑" if msg["role"] == "user" else "🤖"
     st.markdown(f"{who}: **{msg['parts']}**")
 
-# Quick Action Buttons
+# # Quick Action Buttons
+# st.markdown("**Need help with something specific?**")
+# col1, col2, col3 = st.columns(3)
+
+# if col1.button("📄 Resume Review"):
+#     st.session_state["messages"].append({"role": "user", "parts": "Can you review my resume and give suggestions for improvement?"})
+
+# if col2.button("📚 Suggest Courses"):
+#     st.session_state["messages"].append({"role": "user", "parts": "Can you suggest beginner-friendly courses in data science for a woman entering tech?"})
+
+# if col3.button("🎤 Mock Interview"):
+#     st.session_state["messages"].append({"role": "user", "parts": "Can you conduct a 3-question mock interview for a frontend developer role?"})
+
+
+# --- Quick Action Buttons with Direct Gemini Response ---
 st.markdown("**Need help with something specific?**")
 col1, col2, col3 = st.columns(3)
 
 if col1.button("📄 Resume Review"):
-    st.session_state["messages"].append({"role": "user", "parts": "Can you review my resume and give suggestions for improvement?"})
+    prompt = "Can you review my resume and give suggestions for improvement?"
+    st.session_state["messages"].append({"role": "user", "parts": prompt})
+    try:
+        response = model.generate_content(st.session_state["messages"])
+        st.session_state["messages"].append({"role": "model", "parts": response.text})
+    except Exception as e:
+        st.error(f"❌ Error: {str(e)}")
 
 if col2.button("📚 Suggest Courses"):
-    st.session_state["messages"].append({"role": "user", "parts": "Can you suggest beginner-friendly courses in data science for a woman entering tech?"})
+    prompt = "Can you suggest beginner-friendly courses in data science for a woman entering tech?"
+    st.session_state["messages"].append({"role": "user", "parts": prompt})
+    try:
+        response = model.generate_content(st.session_state["messages"])
+        st.session_state["messages"].append({"role": "model", "parts": response.text})
+    except Exception as e:
+        st.error(f"❌ Error: {str(e)}")
 
 if col3.button("🎤 Mock Interview"):
-    st.session_state["messages"].append({"role": "user", "parts": "Can you conduct a 3-question mock interview for a frontend developer role?"})
+    prompt = "Can you conduct a 3-question mock interview for a frontend developer role?"
+    st.session_state["messages"].append({"role": "user", "parts": prompt})
+    try:
+        response = model.generate_content(st.session_state["messages"])
+        st.session_state["messages"].append({"role": "model", "parts": response.text})
+    except Exception as e:
+        st.error(f"❌ Error: {str(e)}")
 
 # Resume File Upload
 
@@ -98,14 +130,27 @@ def extract_text_from_file(uploaded_file):
     else:
         return "Unsupported file type."
 
+# uploaded_file = st.file_uploader("📎 Upload your resume (PDF, DOCX, or TXT)", type=["pdf", "docx", "txt"])
+
+# if uploaded_file:
+#     extracted_text = extract_text_from_file(uploaded_file)
+#     st.session_state["messages"].append({
+#         "role": "user",
+#         "parts": f"Please review my resume and provide feedback:\n{extracted_text}"
+#     })
+
+
 uploaded_file = st.file_uploader("📎 Upload your resume (PDF, DOCX, or TXT)", type=["pdf", "docx", "txt"])
 
 if uploaded_file:
     extracted_text = extract_text_from_file(uploaded_file)
-    st.session_state["messages"].append({
-        "role": "user",
-        "parts": f"Please review my resume and provide feedback:\n{extracted_text}"
-    })
+    prompt = f"Please review my resume and provide feedback:\n{extracted_text}"
+    st.session_state["messages"].append({"role": "user", "parts": prompt})
+    try:
+        response = model.generate_content(st.session_state["messages"])
+        st.session_state["messages"].append({"role": "model", "parts": response.text})
+    except Exception as e:
+        st.error(f"❌ Error: {str(e)}")
 
 # Multilingual Support
 language = st.selectbox("🌐 Respond in:", ["English", "Spanish", "Hindi", "French"])
