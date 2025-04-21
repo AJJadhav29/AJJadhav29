@@ -58,26 +58,26 @@ for msg in st.session_state["messages"]:
     who = "🧑" if msg["role"] == "user" else "🤖"
     st.markdown(f"{who}: **{msg['parts']}**")
 
-# 📚 Recommend Courses Button
-if st.button("📚 Recommend Courses for Data Science"):
-    course_prompt = "Recommend beginner-friendly Coursera or edX courses for women who want to start a career in Data Science."
-    try:
-        response = model.generate_content(course_prompt)
-        st.markdown(f"🤖: **{response.text}**")
-    except Exception as e:
-        st.error(f"❌ Error: {str(e)}")
+# # 📚 Recommend Courses Button
+# if st.button("📚 Recommend Courses for Data Science"):
+#     course_prompt = "Recommend beginner-friendly Coursera or edX courses for women who want to start a career in Data Science."
+#     try:
+#         response = model.generate_content(course_prompt)
+#         st.markdown(f"🤖: **{response.text}**")
+#     except Exception as e:
+#         st.error(f"❌ Error: {str(e)}")
 
-# 📄 Resume Review Section
-st.markdown("### 📄 Resume / Cover Letter Review")
-resume_text = st.text_area("Paste your resume or cover letter for feedback:")
+# # 📄 Resume Review Section
+# st.markdown("### 📄 Resume / Cover Letter Review")
+# resume_text = st.text_area("Paste your resume or cover letter for feedback:")
 
-if st.button("🔍 Review My Resume"):
-    resume_prompt = f"Review this resume or cover letter and suggest improvements:\n\n{resume_text}"
-    try:
-        response = model.generate_content(resume_prompt)
-        st.markdown(f"🤖: **{response.text}**")
-    except Exception as e:
-        st.error(f"❌ Error: {str(e)}")
+# if st.button("🔍 Review My Resume"):
+#     resume_prompt = f"Review this resume or cover letter and suggest improvements:\n\n{resume_text}"
+#     try:
+#         response = model.generate_content(resume_prompt)
+#         st.markdown(f"🤖: **{response.text}**")
+#     except Exception as e:
+#         st.error(f"❌ Error: {str(e)}")
 
 
 
