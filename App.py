@@ -26,6 +26,8 @@
 
 import streamlit as st
 import google.generativeai as genai
+import fitz  # PyMuPDF
+import docx
 
 # Load API key securely from Streamlit secrets
 api_key = st.secrets["GEMINI_API_KEY"]
@@ -73,11 +75,37 @@ if col3.button("🎤 Mock Interview"):
 
 # Resume File Upload
 
-uploaded_file = st.file_uploader("📎 Upload your resume (PDF or TXT)", type=["pdf", "txt"])
+
+
+def extract_text_from_file(uploaded_file):
+    file_type = uploaded_file.name.split('.')[-1].lower()
+
+    if file_type == "txt":
+        return uploaded_file.read().decode("utf-8")
+
+    elif file_type == "pdf":
+        pdf = fitz.open(stream=uploaded_file.read(), filetype="pdf")
+        text = ""
+        for page in pdf:
+            text += page.get_text()
+        return text
+
+    elif file_type == "docx":
+        doc = docx.Document(uploaded_file)
+        text = "\n".join([para.text for para in doc.paragraphs])
+        return text
+
+    else:
+        return "Unsupported file type."
+
+uploaded_file = st.file_uploader("📎 Upload your resume (PDF, DOCX, or TXT)", type=["pdf", "docx", "txt"])
 
 if uploaded_file:
-    text = uploaded_file.read().decode("utf-8")  # For TXT files
-    st.session_state["messages"].append({"role": "user", "parts": f"Please review my resume:\n{text}"})
+    extracted_text = extract_text_from_file(uploaded_file)
+    st.session_state["messages"].append({
+        "role": "user",
+        "parts": f"Please review my resume and provide feedback:\n{extracted_text}"
+    })
 
 # Multilingual Support
 language = st.selectbox("🌐 Respond in:", ["English", "Spanish", "Hindi", "French"])
