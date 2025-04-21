@@ -149,15 +149,15 @@ if st.button("Suggest Learning Path"):
         st.markdown(f"🤖: **{reply}**")
 
 
-# ----- Multilingual Translation -----
-language = st.selectbox("🌐 Respond in:", ["English", "Spanish", "Hindi", "French"])
+# # ----- Multilingual Translation -----
+# language = st.selectbox("🌐 Respond in:", ["English", "Spanish", "Hindi", "French"])
 
-if language != "English" and st.session_state["messages"]:
-    last_response = st.session_state["messages"][-1]["parts"]
-    translation_prompt = f"Translate the following text into {language}:\n\n{last_response}"
-    translated = ask_single_prompt(translation_prompt)
-    if translated:
-        st.markdown(f"🌐 **Translated ({language}):** {translated}")
+# if language != "English" and st.session_state["messages"]:
+#     last_response = st.session_state["messages"][-1]["parts"]
+#     translation_prompt = f"Translate the following text into {language}:\n\n{last_response}"
+#     translated = ask_single_prompt(translation_prompt)
+#     if translated:
+#         st.markdown(f"🌐 **Translated ({language}):** {translated}")
 
 
 
