@@ -58,6 +58,57 @@ for msg in st.session_state["messages"]:
     who = "🧑" if msg["role"] == "user" else "🤖"
     st.markdown(f"{who}: **{msg['parts']}**")
 
+# Quick Action Buttons
+st.markdown("**Need help with something specific?**")
+col1, col2, col3 = st.columns(3)
+
+if col1.button("📄 Resume Review"):
+    st.session_state["messages"].append({"role": "user", "parts": "Can you review my resume and give suggestions for improvement?"})
+
+if col2.button("📚 Suggest Courses"):
+    st.session_state["messages"].append({"role": "user", "parts": "Can you suggest beginner-friendly courses in data science for a woman entering tech?"})
+
+if col3.button("🎤 Mock Interview"):
+    st.session_state["messages"].append({"role": "user", "parts": "Can you conduct a 3-question mock interview for a frontend developer role?"})
+
+# Resume File Upload
+
+uploaded_file = st.file_uploader("📎 Upload your resume (PDF or TXT)", type=["pdf", "txt"])
+
+if uploaded_file:
+    text = uploaded_file.read().decode("utf-8")  # For TXT files
+    st.session_state["messages"].append({"role": "user", "parts": f"Please review my resume:\n{text}"})
+
+# Multilingual Support
+language = st.selectbox("🌐 Respond in:", ["English", "Spanish", "Hindi", "French"])
+if language != "English":
+    st.session_state["messages"].append({
+        "role": "user",
+        "parts": f"Translate the next answer into {language}."
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # # 📚 Recommend Courses Button
 # if st.button("📚 Recommend Courses for Data Science"):
 #     course_prompt = "Recommend beginner-friendly Coursera or edX courses for women who want to start a career in Data Science."
