@@ -129,7 +129,16 @@ else:
 st.markdown("### 📚 Personalized Learning Path")
 
 domain = st.selectbox("Choose a career track:", [
-    "Frontend Developer", "Data Scientist", "Cloud Engineer", "Cybersecurity Analyst", "Product Manager"
+    "Frontend Development", 
+    "Data Science", 
+    "Cloud Engineering", 
+    "Cybersecurity", 
+    "Product Management", 
+    "AI/ML", 
+    "UX Design", 
+    "Backend Development", 
+    "Full Stack Development", 
+    "Data Engineering"
 ])
 
 if st.button("Suggest Learning Path"):
