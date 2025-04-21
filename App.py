@@ -109,7 +109,7 @@ st.markdown("### 🧑‍🏫 Find a Mentor")
 
 mentors_df = pd.read_csv("mentors.csv")
 
-ield_choice = st.selectbox("Choose your tech field for mentorship:", mentors_df["field"].unique())
+field_choice = st.selectbox("Choose your tech field for mentorship:", mentors_df["field"].unique())
 
 filtered = mentors_df[mentors_df["field"] == field_choice]
 
