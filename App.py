@@ -15,9 +15,9 @@ model = genai.GenerativeModel("gemini-1.5-flash")
 if "messages" not in st.session_state:
     st.session_state["messages"] = []
 
-st.set_page_config(page_title="Women in Tech Career Coach", layout="centered")
-st.title("👩‍💻 Women in Tech Career Coach")
-st.markdown("Empowering women to grow in tech careers through personalized guidance.")
+st.set_page_config(page_title="Tech Career Coach", layout="centered")
+st.title("👩‍💻Tech Career Coach")
+st.markdown("Empowering growth in tech careers through personalized guidance.")
 
 # One-shot Gemini call for fresh prompts (without chat history)
 def ask_single_prompt(prompt_text):
@@ -31,7 +31,7 @@ def ask_single_prompt(prompt_text):
 
 # Input from user
 user_input = st.text_input("💬 Ask me anything about tech careers, mentorship, or STEM growth:")
-st.caption("Examples: 'How do I transition into tech after a career gap?' or 'Tips for women founders in AI?'")
+st.caption("Examples: 'How do I transition into tech after a career gap?'")
 if user_input:
     st.session_state["last_input"] = user_input
     st.session_state["messages"].append({"role": "user", "parts": user_input})
@@ -142,7 +142,7 @@ domain = st.selectbox("Choose a career track:", [
 ])
 
 if st.button("Suggest Learning Path"):
-    prompt = f"Suggest a beginner-to-intermediate learning path using freeCodeCamp or Coursera for a woman interested in becoming a {domain}. Include key skills, certifications, and estimated timeline."
+    prompt = f"Suggest a beginner-to-intermediate learning path using freeCodeCamp or Coursera for interested in becoming a {domain}. Include key skills, certifications, and estimated timeline."
     st.markdown(f"🧑: **{prompt}**")
     reply = ask_single_prompt(prompt)
     if reply:
