@@ -1,29 +1,3 @@
-# import streamlit as st
-# import google.generativeai as genai
-# import os
-
-# # Load Gemini API Key from Streamlit secrets
-# genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
-
-# # Initialize model
-# model = genai.GenerativeModel(model_name='models/gemini-pro')
-
-# # Set Up Streamlit UI
-# st.set_page_config(page_title="Women in Tech Career Coach", layout="centered")
-# st.title("👩‍💻 Women in Tech Career Coach")
-# st.markdown("Empowering women to grow in tech careers through personalized guidance.")
-
-# # Build the Chatbot Interface
-# with st.form("chat_form"):
-#     user_input = st.text_area("💬 Ask me anything about your tech career, resume, courses, or interviews:")
-#     submit = st.form_submit_button("Send")
-
-# if submit and user_input:
-#     with st.spinner("Thinking..."):
-#         response = model.generate_content(user_input)
-#         st.markdown(f"**Career Coach:** {response.text}")
-
-
 import streamlit as st
 import google.generativeai as genai
 import fitz  # PyMuPDF
@@ -55,8 +29,8 @@ def ask_single_prompt(prompt_text):
 
 
 # Input from user
-user_input = st.text_input("💬 Ask me anything about your tech career, resume, courses, or interviews:")
-
+user_input = st.text_input("💬 Ask me anything about tech careers, mentorship, or STEM growth:")
+st.caption("Examples: 'How do I transition into tech after a career gap?' or 'Tips for women founders in AI?'")
 if user_input:
     st.session_state["last_input"] = user_input
     st.session_state["messages"].append({"role": "user", "parts": user_input})
@@ -75,71 +49,30 @@ for msg in st.session_state["messages"]:
 if "last_input" in st.session_state and not user_input:
     st.markdown(f"🧑: **{st.session_state['last_input']}**")
     
-# # Quick Action Buttons
+# # --- Quick Action Buttons with Direct Gemini Response ---
 # st.markdown("**Need help with something specific?**")
 # col1, col2, col3 = st.columns(3)
 
 # if col1.button("📄 Resume Review"):
-#     st.session_state["messages"].append({"role": "user", "parts": "Can you review my resume and give suggestions for improvement?"})
-
-# if col2.button("📚 Suggest Courses"):
-#     st.session_state["messages"].append({"role": "user", "parts": "Can you suggest beginner-friendly courses in data science for a woman entering tech?"})
-
-# if col3.button("🎤 Mock Interview"):
-#     st.session_state["messages"].append({"role": "user", "parts": "Can you conduct a 3-question mock interview for a frontend developer role?"})
-
-
-# --- Quick Action Buttons with Direct Gemini Response ---
-st.markdown("**Need help with something specific?**")
-col1, col2, col3 = st.columns(3)
-
-if col1.button("📄 Resume Review"):
-    prompt = "Can you review my resume and give suggestions for improvement?"
-    st.markdown(f"🧑: **{prompt}**")
-    reply = ask_single_prompt(prompt)
-    if reply:
-        st.markdown(f"🤖: **{reply}**")
-
-if col2.button("📚 Suggest Courses"):
-    prompt = "Can you suggest beginner-friendly courses in data science for a woman entering tech?"
-    st.markdown(f"🧑: **{prompt}**")
-    reply = ask_single_prompt(prompt)
-    if reply:
-        st.markdown(f"🤖: **{reply}**")
-
-if col3.button("🎤 Mock Interview"):
-    prompt = "Can you conduct a 3-question mock interview for a frontend developer role?"
-    st.markdown(f"🧑: **{prompt}**")
-    reply = ask_single_prompt(prompt)
-    if reply:
-        st.markdown(f"🤖: **{reply}**")
-
-# if col1.button("📄 Resume Review"):
 #     prompt = "Can you review my resume and give suggestions for improvement?"
-#     st.session_state["messages"].append({"role": "user", "parts": prompt})
-#     try:
-#         response = model.generate_content(st.session_state["messages"])
-#         st.session_state["messages"].append({"role": "model", "parts": response.text})
-#     except Exception as e:
-#         st.error(f"❌ Error: {str(e)}")
+#     st.markdown(f"🧑: **{prompt}**")
+#     reply = ask_single_prompt(prompt)
+#     if reply:
+#         st.markdown(f"🤖: **{reply}**")
 
 # if col2.button("📚 Suggest Courses"):
 #     prompt = "Can you suggest beginner-friendly courses in data science for a woman entering tech?"
-#     st.session_state["messages"].append({"role": "user", "parts": prompt})
-#     try:
-#         response = model.generate_content(st.session_state["messages"])
-#         st.session_state["messages"].append({"role": "model", "parts": response.text})
-#     except Exception as e:
-#         st.error(f"❌ Error: {str(e)}")
+#     st.markdown(f"🧑: **{prompt}**")
+#     reply = ask_single_prompt(prompt)
+#     if reply:
+#         st.markdown(f"🤖: **{reply}**")
 
 # if col3.button("🎤 Mock Interview"):
 #     prompt = "Can you conduct a 3-question mock interview for a frontend developer role?"
-#     st.session_state["messages"].append({"role": "user", "parts": prompt})
-#     try:
-#         response = model.generate_content(st.session_state["messages"])
-#         st.session_state["messages"].append({"role": "model", "parts": response.text})
-#     except Exception as e:
-#         st.error(f"❌ Error: {str(e)}")
+#     st.markdown(f"🧑: **{prompt}**")
+#     reply = ask_single_prompt(prompt)
+#     if reply:
+#         st.markdown(f"🤖: **{reply}**")
 
 # Resume File Upload
 def extract_text_from_file(uploaded_file):
@@ -147,19 +80,16 @@ def extract_text_from_file(uploaded_file):
 
     if file_type == "txt":
         return uploaded_file.read().decode("utf-8")
-
     elif file_type == "pdf":
         pdf = fitz.open(stream=uploaded_file.read(), filetype="pdf")
         text = ""
         for page in pdf:
             text += page.get_text()
         return text
-
     elif file_type == "docx":
         doc = docx.Document(uploaded_file)
         text = "\n".join([para.text for para in doc.paragraphs])
         return text
-
     else:
         return "Unsupported file type."
 
@@ -172,6 +102,37 @@ if uploaded_file:
     reply = ask_single_prompt(prompt)
     if reply:
         st.markdown(f"🤖: **{reply}**")
+
+# ----- 🔹 Mentor Match Suggestions (Static) -----
+st.markdown("### 🧑‍🏫 Find a Mentor")
+
+mentors = [
+    {"name": "Anita Sharma", "field": "Data Science", "email": "anita@example.com"},
+    {"name": "Fatima Khan", "field": "Cybersecurity", "email": "fatima@example.com"},
+    {"name": "Mei Lin", "field": "Product Management", "email": "mei@example.com"},
+]
+
+interest = st.selectbox("Choose your tech field for mentorship:", [m["field"] for m in mentors])
+
+matched = next((m for m in mentors if m["field"] == interest), None)
+
+if matched:
+    st.markdown(f"👩 Mentor Match: **{matched['name']}**  \n📧 Contact: `{matched['email']}`")
+
+# ----- 🔹 Learning Path Suggestion -----
+st.markdown("### 📚 Personalized Learning Path")
+
+domain = st.selectbox("Choose a career track:", [
+    "Frontend Developer", "Data Scientist", "Cloud Engineer", "Cybersecurity Analyst", "Product Manager"
+])
+
+if st.button("Suggest Learning Path"):
+    prompt = f"Suggest a beginner-to-intermediate learning path using freeCodeCamp or Coursera for a woman interested in becoming a {domain}. Include key skills, certifications, and estimated timeline."
+    st.markdown(f"🧑: **{prompt}**")
+    reply = ask_single_prompt(prompt)
+    if reply:
+        st.markdown(f"🤖: **{reply}**")
+
 
 # ----- Multilingual Translation -----
 language = st.selectbox("🌐 Respond in:", ["English", "Spanish", "Hindi", "French"])
