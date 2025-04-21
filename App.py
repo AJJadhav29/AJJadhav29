@@ -73,6 +73,14 @@ for msg in st.session_state["messages"]:
 # if col3.button("🎤 Mock Interview"):
 #     st.session_state["messages"].append({"role": "user", "parts": "Can you conduct a 3-question mock interview for a frontend developer role?"})
 
+# One-shot Gemini call for fresh prompts (without chat history)
+def ask_single_prompt(prompt_text):
+    try:
+        response = model.generate_content(prompt_text)
+        return response.text
+    except Exception as e:
+        st.error(f"❌ Error: {str(e)}")
+        return None
 
 # --- Quick Action Buttons with Direct Gemini Response ---
 st.markdown("**Need help with something specific?**")
@@ -80,30 +88,48 @@ col1, col2, col3 = st.columns(3)
 
 if col1.button("📄 Resume Review"):
     prompt = "Can you review my resume and give suggestions for improvement?"
-    st.session_state["messages"].append({"role": "user", "parts": prompt})
-    try:
-        response = model.generate_content(st.session_state["messages"])
-        st.session_state["messages"].append({"role": "model", "parts": response.text})
-    except Exception as e:
-        st.error(f"❌ Error: {str(e)}")
+    reply = ask_single_prompt(prompt)
+    if reply:
+        st.markdown(f"**🤖 Career Coach:** {reply}")
 
 if col2.button("📚 Suggest Courses"):
     prompt = "Can you suggest beginner-friendly courses in data science for a woman entering tech?"
-    st.session_state["messages"].append({"role": "user", "parts": prompt})
-    try:
-        response = model.generate_content(st.session_state["messages"])
-        st.session_state["messages"].append({"role": "model", "parts": response.text})
-    except Exception as e:
-        st.error(f"❌ Error: {str(e)}")
+    reply = ask_single_prompt(prompt)
+    if reply:
+        st.markdown(f"**🤖 Career Coach:** {reply}")
 
 if col3.button("🎤 Mock Interview"):
     prompt = "Can you conduct a 3-question mock interview for a frontend developer role?"
-    st.session_state["messages"].append({"role": "user", "parts": prompt})
-    try:
-        response = model.generate_content(st.session_state["messages"])
-        st.session_state["messages"].append({"role": "model", "parts": response.text})
-    except Exception as e:
-        st.error(f"❌ Error: {str(e)}")
+    reply = ask_single_prompt(prompt)
+    if reply:
+        st.markdown(f"**🤖 Career Coach:** {reply}")
+
+# if col1.button("📄 Resume Review"):
+#     prompt = "Can you review my resume and give suggestions for improvement?"
+#     st.session_state["messages"].append({"role": "user", "parts": prompt})
+#     try:
+#         response = model.generate_content(st.session_state["messages"])
+#         st.session_state["messages"].append({"role": "model", "parts": response.text})
+#     except Exception as e:
+#         st.error(f"❌ Error: {str(e)}")
+
+# if col2.button("📚 Suggest Courses"):
+#     prompt = "Can you suggest beginner-friendly courses in data science for a woman entering tech?"
+#     st.session_state["messages"].append({"role": "user", "parts": prompt})
+#     try:
+#         response = model.generate_content(st.session_state["messages"])
+#         st.session_state["messages"].append({"role": "model", "parts": response.text})
+#     except Exception as e:
+#         st.error(f"❌ Error: {str(e)}")
+
+# if col3.button("🎤 Mock Interview"):
+#     prompt = "Can you conduct a 3-question mock interview for a frontend developer role?"
+#     st.session_state["messages"].append({"role": "user", "parts": prompt})
+#     try:
+#         response = model.generate_content(st.session_state["messages"])
+#         st.session_state["messages"].append({"role": "model", "parts": response.text})
+#     except Exception as e:
+#         st.error(f"❌ Error: {str(e)}")
 
 # Resume File Upload
 
