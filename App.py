@@ -214,7 +214,7 @@ elif menu == "Resume Review":
 # --- MENTOR MATCH PAGE ---
 elif menu == "Mentor Match":
     st.title("🧑‍🏫 Mentor Match")
-    df = pd.read_csv("mentors_100.csv")
+    df = pd.read_csv("mentors.csv")
 
     field = st.selectbox("Field of interest:", sorted(df["field"].unique()))
     gender = st.selectbox("Preferred gender:", ["Any", "Female", "Male"])
