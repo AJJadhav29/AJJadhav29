@@ -134,7 +134,7 @@
 #     if translated:
 #         st.markdown(f"🌐 **Translated ({language}):** {translated}")
 
-
+#New
 
 #--------------- NEW Design CODE-------------------------#
 import streamlit as st
