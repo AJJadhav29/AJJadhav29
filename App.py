@@ -207,8 +207,7 @@ elif menu == "Resume Review":
     if uploaded_file:
         extracted_text = extract_text_from_file(uploaded_file)
         st.markdown("**🧑: Uploaded resume for review.**")
-        reply = ask_single_prompt(f"Please review this resume:
-{extracted_text}")
+        reply = ask_single_prompt(f"Please review this resume:{extracted_text}")
         if reply:
             st.markdown(f"🤖: {reply}")
 
