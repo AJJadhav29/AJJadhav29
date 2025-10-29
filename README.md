@@ -9,8 +9,7 @@ Passionate about solving real-world problems through data-driven projects and ma
 ---
 
 ## 📖 About Me
-I am currently pursuing my Master of Science in Information Systems (MIS - Data Science concentration) at Pace University, NY.  
-Through academic projects and experiential learning, I have gained hands-on experience in predictive modeling, data analysis, database management, and business intelligence solutions.
+Data Analyst with around 3+ years of experience in transforming raw data into meaningful insights that drive business growth and operational excellence. Skilled in Python, SQL, Power BI, Tableau, and AWS, with proven expertise in data cleaning, statistical modeling, predictive analytics, and KPI-driven dashboard development. Adept at designing scalable data pipelines, automating reporting processes, and leveraging advanced analytics to optimize decision-making. Known for strong collaboration with cross-functional teams, translating business objectives into actionable analytical solutions, and presenting insights that enhance performance and profitability.
 
 ---
 
