@@ -3,7 +3,7 @@
 ### 🎯 Data Analyst | Aspiring Data Scientist  
 Passionate about solving real-world problems through data-driven projects and machine learning models.
 
-📧 [aakashjjadhav123@gmail.com](mailto:aakashjjadhav123@gmail.com)  
+📧 [aakashjjadhav0598@gmail.com](mailto:aakashjjadhav123@gmail.com)  
 🔗 [LinkedIn](https://www.linkedin.com/in/aakashjadhav123) | [GitHub](https://github.com/AJJadhav29)
 
 ---
