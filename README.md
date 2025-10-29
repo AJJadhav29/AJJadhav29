@@ -51,6 +51,7 @@ GPA: 3.78/4.0 | Sep 2023 – May 2025
 ## 🏆 Certifications
 - Overview of Data Visualization – Coursera (Feb 2024)
 - Java Development – Q and J Spider (Jan 2022)
+- Python - Udemy (October 2025)
 
 ---
 
