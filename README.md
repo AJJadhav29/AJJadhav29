@@ -9,37 +9,46 @@ Building reliable data workflows, analytics solutions, and dashboards that turn 
 ---
 
 ## 📖 About Me
-Data Analyst with 3+ years of experience transforming large, complex datasets into reliable reporting and operational insight. Skilled in SQL, Python, Power BI, Tableau, and cloud platforms, with hands-on experience building ETL pipelines, automating workflows, improving data quality, and supporting leadership decision-making. Known for strong collaboration with technical and business stakeholders, clear communication, and delivering analytics solutions that are accurate, scalable, and practical.
+Data Analyst with 4+ years of experience turning large financial, payment collection, banking, and operational datasets into actionable insights using SQL, Python, Excel, and statistical analysis. Hands-on with revenue protection, fee-evasion and leakage analysis, computer vision/optical detection performance evaluation (accuracy, false-positive/false-negative rates, processing latency), A/B test analysis, and automated data quality validation. Builds Power BI and Tableau KPI dashboards and partners directly with operations, finance, engineering, and external vendors to translate analytical findings into action—from recovering unbilled revenue to evaluating automated payment and verification systems.
 
 ---
 
 ## 🚀 Core Skills
-- **Data Analysis & Querying:** Advanced SQL, Joins, CTEs, Window Functions, Data Extraction, Data Profiling, Data Validation, Exploratory Data Analysis, Excel (Pivot Tables)
-- **Programming & Automation:** Python (Pandas, NumPy), Workflow Automation, Data Cleaning, Feature Engineering, Statistical Analysis, Time-Series Analysis
-- **BI, Dashboards & Reporting:** Power BI (DAX, Data Modeling), Tableau, Dashboard Development, KPI Tracking, Operational Reporting, Metrics Reporting
-- **Data Engineering & ETL:** ETL Pipeline Development, Data Integration, Data Transformation, Data Warehousing Concepts
-- **Cloud & Big Data:** AWS (S3, Glue), Azure OpenAI, Snowflake, Databricks, Scalable Data Pipelines
-- **Data Quality & Governance:** Data Quality Management, Data Governance Frameworks, Data Privacy & Security, HIPAA Compliance
-- **Advanced Analytics & AI:** Predictive Modeling, Machine Learning, NLP, Generative AI, LangChain, Anomaly Detection
+- **Analytics & Quantitative Methods:** KPI Development, Performance Measurement, Revenue Protection & Leakage Analysis, A/B Testing, Customer Segmentation, Statistical & Regression Modeling, Cost-Benefit Analysis, Trend & Anomaly Detection
+- **SQL, Programming & Data Quality:** SQL (Snowflake, PostgreSQL, Oracle, AWS Athena – Joins, CTEs, Window Functions), Python (Pandas, NumPy), Automated Reconciliation, Data Quality Validation, ETL & Pipeline Auditing (AWS S3, Glue)
+- **BI, Visualization & Reporting:** Power BI (DAX), Tableau, Advanced Excel (Pivot Tables, Financial Modeling, Lookups), Executive Dashboards, Funnel & Operational Reporting
+- **Technology & Detection Evaluation:** Computer Vision & Optical Detection Benchmarking, Pilot & Field Acceptance Testing, Accuracy & Error-Rate Analysis (False Positives/Negatives), Vendor SLA Monitoring, Defect & Outage Tracking
+- **Domains & Governance:** Automated Payment & Billing Systems, Banking & Financial Operations, Healthcare Analytics, SOP Development, Data Governance & Privacy Compliance, Agile (JIRA, Confluence)
 
 ---
 
 ## 💼 Professional Experience
 ### **Data Analyst | CitiusTech, USA**
-*Aug 2025 – Present*
-- Cleaned, structured, and integrated large clinical and claims datasets into AWS S3 and Snowflake, using SQL and PySpark to create analysis-ready metrics for reporting.
-- Built and automated ETL pipelines with Apache Airflow and AWS Glue to process daily operational feeds into a Databricks Lakehouse for reliable data refreshes.
-- Standardized inconsistent source data using ICD-10, CPT, and HL7/FHIR mapping standards, improving data quality and reporting accuracy.
-- Developed AI-driven decision workflows using Azure OpenAI and LangChain to automate manual review steps with secure, HIPAA-compliant data handling.
-- Designed Power BI and Tableau dashboards on Snowflake and streaming data, giving leadership near real-time visibility into operational and cost metrics.
+*Aug 2025 – Present*  
+*RevVista | Financial Revenue Integrity, Automated Payment & Optical Verification Platform*
+- Analyzed monthly payment collection, billing, and financial transaction datasets in Snowflake SQL to identify fee-evasion patterns, unbilled balances, and revenue leakage across regional service locations, building Excel cost models to estimate recoverable revenue and avoided losses.
+- Evaluated computer vision and optical payment/ID capture pilots prior to operational deployment, benchmarking detection accuracy, false-positive and false-negative rates, processing latency, system availability, and manual human-review fallbacks under varying field conditions.
+- Built Python (Pandas) data quality scripts and validated AWS (S3, Glue, Athena) pipelines to flag duplicate transaction IDs, low-quality image metadata, system outages, and missing kiosk/terminal identifiers before data reached financial reporting.
+- Developed Power BI dashboards (DAX) for finance and operations leadership tracking revenue recovery KPIs, implementation and maintenance costs, and payment failure trends by location, time period, and operating condition.
+- Monitored external technology vendor performance against contractual SLAs, tracked system defects and corrective actions, documented standard operating procedures (SOPs), and partnered with compliance teams to enforce strict data governance and privacy standards.
 
 ### **Data Analyst | Persistent Systems, India**
 *Aug 2020 – Jul 2023*
-- Extracted and transformed large billing and operational datasets from SQL Server and MySQL using SQL and Python, improving data accuracy and reporting reliability.
-- Automated data validation and transformation workflows with SQL and Python, improving reporting efficiency by 35% and reducing manual effort.
-- Built ETL pipelines with Talend and Informatica to integrate multiple source systems into a centralized data warehouse.
-- Applied anomaly detection with Python to identify unusual patterns, reducing irregular claim activity by 28% and supporting audit teams.
-- Built Power BI and Tableau dashboards and conducted time-series analysis that improved resource-planning efficiency by 30%.
+
+**Client: HDFC Bank | FinSight Revenue Intelligence Platform**
+- Reconciled payment gateway logs against billing records with PostgreSQL and Oracle SQL to detect unrecorded transaction fees, enabling the finance team to recover revenue from unbilled transactions.
+- Segmented customers by spending patterns in Python (Pandas, NumPy) to identify high-value premium credit card users, informing targeted marketing offers.
+- Automated SQL validation checks comparing transaction totals across payment and accounting systems, and built Power BI dashboards on monthly revenue by product (credit cards, personal loans, online banking) for executives.
+
+**Client: Flipkart | ShopSmart Customer Analytics Platform**
+- Analyzed A/B tests of promotional banners with Python statistical analysis to identify the higher-converting design.
+- Segmented customers into frequent, seasonal, and first-time buyers in Python and measured repeat-purchase intervals in PostgreSQL, giving marketing clear segments for targeted promotions.
+- Built Tableau purchase-funnel dashboards (product views, add-to-cart, purchase) that showed product teams where customers dropped off.
+
+**Client: Apollo Hospitals | CareInsight Clinical Analytics Platform**
+- Analyzed 30-day readmission rates by treatment category in Python (Pandas), showing where follow-up care could improve.
+- Calculated department-level bed utilization (cardiology, orthopedics, emergency) in Oracle SQL to reveal capacity shortages.
+- Built Power BI dashboards on wait times, treatment duration, occupancy, and admission trends that supported staff allocation during peak periods; wrote SQL checks for missing diagnostic codes and incorrect treatment entries.
 
 ---
 
